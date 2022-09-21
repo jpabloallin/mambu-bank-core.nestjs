@@ -1,20 +1,35 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ClientsService } from './clients.service';
+import { CreateClientCommand } from './commands/create-client.command';
 import { CreateClientDto } from './dto/create-client.dto';
+import { ResponseClientDto } from './dto/response-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
+import { Client } from './entities/client/client.entity';
+import { GetClientsQuery } from './queries/get-clients/get-clients.query';
 
 @Controller('clients')
 export class ClientsController {
-  constructor(private readonly clientsService: ClientsService) {}
+  constructor(
+    private readonly clientsService: ClientsService,
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+    ) {}
 
   @Post()
   async create(@Body() createClientDto: CreateClientDto) {
-    return await this.clientsService.create(createClientDto);
+
+    return await this.commandBus.execute<CreateClientCommand, Client>(
+      new CreateClientCommand(createClientDto),
+    );
+    //this.clientsService.create(createClientDto);
   }
 
   @Get()
-  findAll() {
-    return this.clientsService.findAll();
+  async findAll(): Promise<ResponseClientDto[]> {
+    return await this.queryBus.execute<GetClientsQuery, ResponseClientDto[]>(
+      new GetClientsQuery( ),
+    );
   }
 
   @Get(':id')

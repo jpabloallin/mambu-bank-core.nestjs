@@ -6,6 +6,6 @@ export const getHeaders = (configService: ConfigService) => {
       apikey: configService.get('APIKEY'),
       Accept: 'application/vnd.mambu.v2+json',
       'Content-Type': 'application/json',
-      'Idempotency-Key': uuid(),
+      idempotencyKey: uuid(),
     };
   };
