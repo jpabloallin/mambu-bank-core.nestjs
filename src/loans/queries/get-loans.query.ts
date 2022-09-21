@@ -1,0 +1,5 @@
+
+export class GetLoansQuery {
+
+    constructor() {}
+}

@@ -9,6 +9,7 @@ import { ChangeStateHandler } from './commands/change-state/change-state.handler
 import { LoanFactory } from './factories/create-loan.factory';
 import { CqrsModule } from '@nestjs/cqrs';
 import { CreateLoanHandler } from './commands/create-loan/create-command.handler';
+import { GetLoansHandler } from './queries/get-loans.handler';
 
 @Module({
   imports: [ ConfigModule, CommonModule, CqrsModule ],
@@ -19,7 +20,8 @@ import { CreateLoanHandler } from './commands/create-loan/create-command.handler
     LoanCreatedHandler,
     LoanCreatedEvent,
     ChangeStateHandler,
-    LoanFactory
+    LoanFactory,
+    GetLoansHandler
   ]
 })
 export class LoansModule {}

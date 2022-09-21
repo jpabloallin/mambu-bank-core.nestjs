@@ -3,17 +3,20 @@ import { LoansService } from './loans.service';
 import { CreateLoanDto } from './dto/create-loan/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
 import { ChangeStateDto } from './dto/change-state/change-state.dto';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateLoanCommand } from './commands/create-loan/create-loan.command';
 import { Loan } from './entities/loan.entity';
 import { ChangeStateCommand } from './commands/change-state/change-state.command';
 import { ResponseChangeStateDto } from './dto/response-change-state.dto';
+import { ResponseLoanDto } from './dto/response.loan.dto';
+import { GetLoansQuery } from './queries/get-loans.query';
 
 @Controller('loans')
 export class LoansController {
   constructor(
     private readonly loansService: LoansService,
-    private readonly commandBus: CommandBus
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
     ) {}
 
   @Post()
@@ -32,8 +35,10 @@ export class LoansController {
     //this.loansService.changeState(loanAccountId, changeStateDto);
   }
   @Get()
-  findAll() {
-    return this.loansService.findAll();
+  async findAll(): Promise<ResponseLoanDto[]> {
+    return await this.queryBus.execute<GetLoansQuery, ResponseLoanDto[]>(
+      new GetLoansQuery(),
+    );
   }
 
   @Get(':id')
