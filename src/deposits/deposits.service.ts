@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateDepositDto } from './dto/deposit_account/create-deposit.dto';
-import { UpdateDepositDto } from './dto/deposit_account/update-deposit.dto';
+import { CreateDepositAccountDto } from './dto/deposit_account/create-deposit-account.dto';
+import { UpdateDepositAccountDto } from './dto/deposit_account/update-deposit-account.dto';
 
 @Injectable()
 export class DepositsService {
-  create(createDepositDto: CreateDepositDto) {
+  create(createDepositAccountDto: CreateDepositAccountDto) {
     return 'This action adds a new deposit';
   }
 
@@ -16,7 +16,7 @@ export class DepositsService {
     return `This action returns a #${id} deposit`;
   }
 
-  update(id: number, updateDepositDto: UpdateDepositDto) {
+  update(id: number, updateDepositAccountDto: UpdateDepositAccountDto) {
     return `This action updates a #${id} deposit`;
   }
 

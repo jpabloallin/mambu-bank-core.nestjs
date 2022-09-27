@@ -1,6 +1,7 @@
-import { IsString } from "class-validator"
+import { IsEnum, IsString } from "class-validator"
+import { DepositAccountStates } from "src/deposits/enums/deposit-account-state.enum";
 
-export class CreateDepositDto {
+export class CreateDepositAccountDto {
 
     @IsString()
     accountHolderKey:  string;
@@ -14,7 +15,7 @@ export class CreateDepositDto {
     @IsString()
     productTypeKey:    string;
 
-    @IsString()
+    @IsEnum(DepositAccountStates)
     accountState:      string;
 
     @IsString()

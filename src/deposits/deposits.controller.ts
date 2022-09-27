@@ -1,14 +1,27 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { CommandBus } from '@nestjs/cqrs';
+import { CreateDepositAccountCommand } from './commands/create-deposit-account.command';
 import { DepositsService } from './deposits.service';
-import { CreateDepositDto } from './dto/deposit_account/create-deposit.dto';
-import { UpdateDepositDto } from './dto/deposit_account/update-deposit.dto';
+import { CreateDepositAccountDto } from './dto/deposit_account/create-deposit-account.dto';
+import { UpdateDepositAccountDto } from './dto/deposit_account/update-deposit-account.dto';
+import { DepositAccountResponseDto } from './dto/responses/deposit-account-response.dto';
 
 @Controller('deposits')
 export class DepositsController {
-  constructor(private readonly depositsService: DepositsService) {}
+  constructor(
+    private readonly depositsService: DepositsService,
+    private readonly commandBus: CommandBus,
+    ) {}
 
   @Post()
-  create(@Body() createDepositDto: CreateDepositDto) {
+  async create(@Body() createDepositAccountDto: CreateDepositAccountDto) {
+    return await this.commandBus.execute<CreateDepositAccountCommand, DepositAccountResponseDto>(
+      new CreateDepositAccountCommand( createDepositAccountDto)
+    )
+  }
+
+  @Post()
+  createDepositAccount(@Body() createDepositDto: CreateDepositAccountDto) {
     return this.depositsService.create(createDepositDto);
   }
 
@@ -23,7 +36,7 @@ export class DepositsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDepositDto: UpdateDepositDto) {
+  update(@Param('id') id: string, @Body() updateDepositDto: UpdateDepositAccountDto) {
     return this.depositsService.update(+id, updateDepositDto);
   }
 
