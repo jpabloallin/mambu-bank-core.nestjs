@@ -3,7 +3,7 @@ import { ConfigService } from "@nestjs/config";
 import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
 import axios, { AxiosInstance } from "axios";
 import { getHeaders } from "src/common/helpers/headers.helper";
-import { ResponseClientDto } from "../dto/response-client.dto";
+import { ResponseClientDto } from "../dto/response/response-client.dto";
 import { Client } from "../entities/client/client.entity";
 import { ClientFactory } from "../factories/create-client.factory";
 import { CreateClientCommand } from './create-client.command';

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios, { AxiosInstance } from 'axios';
-import { CreateClientDto } from './dto/create-client.dto';
+import { CreateClientDto } from './dto/create_client/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { getHeaders } from '../common/helpers/headers.helper';
-import { ResponseClientDto } from './dto/response-client.dto';
+import { ResponseClientDto } from './dto/response/response-client.dto';
 
 @Injectable()
 export class ClientsService {

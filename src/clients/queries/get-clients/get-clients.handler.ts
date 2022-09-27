@@ -1,7 +1,7 @@
 import { ConfigService } from "@nestjs/config";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import axios, { AxiosInstance } from "axios";
-import { ResponseClientDto } from "src/clients/dto/response-client.dto";
+import { ResponseClientDto } from "src/clients/dto/response/response-client.dto";
 import { getHeaders } from "src/common/helpers/headers.helper";
 import { GetClientsQuery } from "./get-clients.query";
 

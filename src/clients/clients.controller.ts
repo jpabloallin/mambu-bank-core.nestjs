@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ClientsService } from './clients.service';
 import { CreateClientCommand } from './commands/create-client.command';
-import { CreateClientDto } from './dto/create-client.dto';
-import { ResponseClientDto } from './dto/response-client.dto';
+import { CreateClientDto } from './dto/create_client/create-client.dto';
+import { ResponseClientDto } from './dto/response/response-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { Client } from './entities/client/client.entity';
 import { GetClientsQuery } from './queries/get-clients/get-clients.query';

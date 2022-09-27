@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { ResponseClientDto } from "../dto/response-client.dto";
+import { ResponseClientDto } from "../dto/response/response-client.dto";
 import { Client } from "../entities/client/client.entity";
 import { ClientCreatedEvent } from "../events/client-created/client-created.event";
 
