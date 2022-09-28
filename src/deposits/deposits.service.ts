@@ -11,16 +11,4 @@ export class DepositsService {
   findAll() {
     return `This action returns all deposits`;
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} deposit`;
-  }
-
-  update(id: number, updateDepositAccountDto: UpdateDepositAccountDto) {
-    return `This action updates a #${id} deposit`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} deposit`;
-  }
 }

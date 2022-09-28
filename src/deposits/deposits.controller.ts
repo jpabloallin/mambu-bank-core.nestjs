@@ -2,14 +2,17 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CommandBus } from '@nestjs/cqrs';
 import { CreateDepositAccountCommand } from './commands/create_deposit_account/create-deposit-account.command';
 import { DepositTransactionCommand } from './commands/deposit_transaction/deposit-transaction.command';
+import { TransferTransactionCommand } from './commands/transfer_transaction/transfer-transaction.command';
 import { WithdrawalTransactionCommand } from './commands/withdrawal_transaction/withdrawal-transaction.command';
 import { DepositsService } from './deposits.service';
 import { CreateDepositAccountDto } from './dto/deposit_account/create-deposit-account.dto';
 import { UpdateDepositAccountDto } from './dto/deposit_account/update-deposit-account.dto';
 import { DepositAccountResponseDto } from './dto/responses/deposit-account-response.dto';
 import { DepositTransactionResponseDto } from './dto/responses/deposit-transaction-response.dto';
+import { TransferTransactionResponseDto } from './dto/responses/transfer-transaction-response.dto';
 import { WithdrawalTransactionResponseDto } from './dto/responses/withdrawal-transaction-response.dto';
 import { DepositTransactionDto } from './dto/transactions/deposit-transaction.dto';
+import { TransferTransactionDto } from './dto/transactions/transfer-transaction.dto';
 import { WithdrawalTransactionDto } from './dto/transactions/withdrawal-transaction.dto';
 
 @Controller('deposits')
@@ -20,15 +23,10 @@ export class DepositsController {
     ) {}
 
   @Post()
-  async create(@Body() createDepositAccountDto: CreateDepositAccountDto) {
+  async createDepositAccount(@Body() createDepositAccountDto: CreateDepositAccountDto) {
     return await this.commandBus.execute<CreateDepositAccountCommand, DepositAccountResponseDto>(
       new CreateDepositAccountCommand( createDepositAccountDto)
     )
-  }
-
-  @Post()
-  createDepositAccount(@Body() createDepositDto: CreateDepositAccountDto) {
-    return this.depositsService.create(createDepositDto);
   }
 
   @Post('deposit-transactions/:depositAccountId')
@@ -45,23 +43,10 @@ export class DepositsController {
     );
   }
 
-  @Get()
-  findAll() {
-    return this.depositsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.depositsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDepositDto: UpdateDepositAccountDto) {
-    return this.depositsService.update(+id, updateDepositDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.depositsService.remove(+id);
+  @Post('transfer-transactions/:depositAccountId')
+  async transferTransaction(@Body() transferTransactionDto: TransferTransactionDto, @Param('depositAccountId') depositAccountId: string,) {
+    return await this.commandBus.execute<TransferTransactionCommand, TransferTransactionResponseDto>(
+      new TransferTransactionCommand(transferTransactionDto, depositAccountId ),
+    );
   }
 }
