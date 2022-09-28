@@ -1,4 +1,4 @@
-import { CreateDepositAccountDto } from "../dto/deposit_account/create-deposit-account.dto";
+import { CreateDepositAccountDto } from "../../dto/deposit_account/create-deposit-account.dto";
 
 export class CreateDepositAccountCommand {
 

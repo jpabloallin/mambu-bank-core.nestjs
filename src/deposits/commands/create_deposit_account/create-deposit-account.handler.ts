@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import axios, { AxiosInstance } from 'axios';
 import { getHeaders } from 'src/common/helpers/headers.helper';
-import { DepositAccountResponseDto } from '../dto/responses/deposit-account-response.dto';
+import { DepositAccountResponseDto } from '../../dto/responses/deposit-account-response.dto';
 import { CreateDepositAccountCommand } from './create-deposit-account.command';
 
 @CommandHandler(CreateDepositAccountCommand)
