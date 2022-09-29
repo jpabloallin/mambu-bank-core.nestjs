@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { ClientsService } from './clients.service';
 import { ClientsController } from './clients.controller';
 import { ConfigModule } from '@nestjs/config';
 import { CommonModule } from 'src/common/common.module';
@@ -29,7 +28,6 @@ import { GetClientsHandler } from './queries/get-clients/get-clients.handler';
   ],
   controllers: [ClientsController],
   providers: [
-    ClientsService, 
     ClientFactory,
     CreateClientHandler,
     ClientCreatedHandler,

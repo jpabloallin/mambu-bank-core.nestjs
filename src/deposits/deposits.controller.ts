@@ -4,9 +4,7 @@ import { CreateDepositAccountCommand } from './commands/create_deposit_account/c
 import { DepositTransactionCommand } from './commands/deposit_transaction/deposit-transaction.command';
 import { TransferTransactionCommand } from './commands/transfer_transaction/transfer-transaction.command';
 import { WithdrawalTransactionCommand } from './commands/withdrawal_transaction/withdrawal-transaction.command';
-import { DepositsService } from './deposits.service';
 import { CreateDepositAccountDto } from './dto/deposit_account/create-deposit-account.dto';
-import { UpdateDepositAccountDto } from './dto/deposit_account/update-deposit-account.dto';
 import { DepositAccountResponseDto } from './dto/responses/deposit-account-response.dto';
 import { DepositTransactionResponseDto } from './dto/responses/deposit-transaction-response.dto';
 import { TransferTransactionResponseDto } from './dto/responses/transfer-transaction-response.dto';
@@ -18,7 +16,6 @@ import { WithdrawalTransactionDto } from './dto/transactions/withdrawal-transact
 @Controller('deposits')
 export class DepositsController {
   constructor(
-    private readonly depositsService: DepositsService,
     private readonly commandBus: CommandBus,
     ) {}
 

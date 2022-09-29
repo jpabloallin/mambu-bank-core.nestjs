@@ -1,5 +1,4 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { LoansService } from './loans.service';
 import { CreateLoanDto } from './dto/create-loan/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
 import { ChangeStateDto } from './dto/change-state/change-state.dto';
@@ -14,7 +13,6 @@ import { GetLoansQuery } from './queries/get-loans.query';
 @Controller('loans')
 export class LoansController {
   constructor(
-    private readonly loansService: LoansService,
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
     ) {}
@@ -24,7 +22,6 @@ export class LoansController {
     return await this.commandBus.execute<CreateLoanCommand, Loan>(
       new CreateLoanCommand(createLoanDto),
     );
-    //this.loansService.create(createLoanDto);
   }
 
   @Post('changeState/:loanAccountId')
@@ -41,18 +38,4 @@ export class LoansController {
     );
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.loansService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {
-    return this.loansService.update(+id, updateLoanDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.loansService.remove(+id);
-  }
 }

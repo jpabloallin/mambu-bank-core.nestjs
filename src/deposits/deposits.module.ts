@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { DepositsService } from './deposits.service';
 import { DepositsController } from './deposits.controller';
 import { CreateDepositAccountHandler } from './commands/create_deposit_account/create-deposit-account.handler';
 import { ConfigModule } from '@nestjs/config';
@@ -13,7 +12,6 @@ import { TransferTransactionHandler } from './commands/transfer_transaction/tran
   imports: [ ConfigModule, CommonModule, CqrsModule ],
   controllers: [DepositsController],
   providers: [
-    DepositsService,
     CreateDepositAccountHandler,
     DepositTransactionHandler,
     WithdrawalTransactionHandler,

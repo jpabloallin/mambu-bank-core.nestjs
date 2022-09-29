@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { LoansService } from './loans.service';
 import { LoansController } from './loans.controller';
 import { ConfigModule } from '@nestjs/config';
 import { CommonModule } from 'src/common/common.module';
@@ -15,7 +14,6 @@ import { GetLoansHandler } from './queries/get-loans.handler';
   imports: [ ConfigModule, CommonModule, CqrsModule ],
   controllers: [LoansController],
   providers: [
-    LoansService,
     CreateLoanHandler,
     LoanCreatedHandler,
     LoanCreatedEvent,
